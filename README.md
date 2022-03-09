@@ -1,4 +1,4 @@
-# MerkleWrite
+# MerkleStream
 ## About
 This is Decentralized Video sharing platform made on top of ipfs, Defi and Ethereum. Nowdays content creation is centralised and are subject to changes or partiality by the site owners. To support the content creators and provide them with equal rights and profits, **merkleStream is made!**
 
