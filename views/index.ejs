@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>MerkleStream</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+
+
+	<!-- Font -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+
+	<link href="common-css/bootstrap.css" rel="stylesheet">
+
+	<link href="common-css/ionicons.css" rel="stylesheet">
+
+
+	<link href="layout-1/css/styles.css" rel="stylesheet">
+
+	<link href="layout-1/css/responsive.css" rel="stylesheet">
+	<script
+  src="https://cdn.jsdelivr.net/npm/@portis/web3@3.0.2/umd/index.js"></script>
+  <script src="common-js/jquery-3.1.1.min.js"></script>
+	<script src="web3.min.js"></script>
+	<script src="web3APP.js"></script>
+	<link href="/mycss.css" rel="stylesheet">
+</head>
+<body >
+
+	<div id="loader" class="text-white text-center">
+		<h2>Connecting You to Merkle Stream</h2>
+		<h4>Deployed on MATIC, Kovan, Powered By PORTIS, Filecoin</h4>
+		<br>
+		<h4 id="msg"></h4>
+	  </div> 
+
+	    <!-- General Modal -->
+<div id="generalMsgModal" class="modal fade" style="z-index: 999999;">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header justify-content-center">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body text-center">
+				<h4>Ooops!</h4>	
+				<p id="generalModalMessage">Error!!!!</p>
+				<!-- <button class="btn btn-success" data-dismiss="modal">Try Again</button> -->
+			</div>
+		</div>
+	</div>
+</div>   
+
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+
+			<a href="/" class="logo"><strong><span class="text-primary" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: large;">MerkleStream</span></strong>
+				</a>
+
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li><a href="/">Home</a></li>
+				<li><a href="/">Categories</a></li>
+				<li><a href="/">Features</a></li>
+				<li><a href="/write">Upload</a></li>
+				<li><a href="/myaccount">My Account</a></li>
+			</ul><!-- main-menu -->
+
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+
+		</div><!-- conatiner -->
+	</header>
+
+	<div class="slider"></div><!-- slider -->
+
+	<section class="blog-area section">
+		<div class="container">
+
+			<div class="row" id="posts">
+
+				
+
+			</div><!-- row -->
+
+			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+
+		</div><!-- container -->
+	</section> <!--section -->
+
+
+	<footer>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<a class="logo" href="#"></a>
+						<p class="copyright">MerkleStream 2020. All rights reserved.</p>
+						<p class="copyright">Designed by <a href="/" target="_blank">Blockchain</a></p>
+						<ul class="icons">
+							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+						</ul>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+						<div class="footer-section">
+						<h4 class="title"><b>CATAGORIES</b></h4>
+						<ul>
+							<li><a href="#">BEAUTY</a></li>
+							<li><a href="#">HEALTH</a></li>
+							<li><a href="#">MUSIC</a></li>
+						</ul>
+						<ul>
+							<li><a href="#">SPORT</a></li>
+							<li><a href="#">DESIGN</a></li>
+							<li><a href="#">TRAVEL</a></li>
+							<li><a href="#">BLOCKCHAIN</a></li>
+							<li><a href="#">TECH</a></li>
+						</ul>
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<h4 class="title"><b>SUBSCRIBE</b></h4>
+						<div class="input-area">
+							<form>
+								<input class="email-input" type="text" placeholder="Enter your email">
+								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+							</form>
+						</div>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</footer>
+
+
+	<!-- SCIPTS -->
+
+	
+
+	<script src="common-js/tether.min.js"></script>
+
+	<script src="common-js/bootstrap.js"></script>
+
+	<script src="common-js/scripts.js"></script>
+	
+	
+	<script>
+$(window).on("load",()=>{
+App.loadIndex();
+});
+	
+
+
+
+
+
+	</script>
+</body>
+</html>

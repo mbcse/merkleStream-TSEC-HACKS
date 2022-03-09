@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="/mycss.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/@portis/web3@3.0.2/umd/index.js"></script>
+        <script src="/common-js/jquery-3.1.1.min.js"></script>
+        <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+        integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+        crossorigin="anonymous"></script> 
+      
+        <script src="/web3.min.js"></script>
+        <script src="/web3APP.js"></script>
+    
+      </head>
+    <body style="">
+
+      <div id="loader" class="text-white text-center">
+        <h2>Connecting You to Merkle Stream</h2>
+        <h4>Deployed on MATIC, Powered By PORTIS</h4>
+        <br>
+        <h4 id="msg"></h4>
+        </div> 
+    
+          <!-- General Modal -->
+    <div id="generalMsgModal" class="modal fade" style="z-index: 999999;">
+      <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <div class="icon-box">
+              <i class="material-icons">&#xE5CD;</i>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body text-center">
+            <h4>Ooops!</h4>	
+            <p id="generalModalMessage">Error!!!!</p>
+            <!-- <button class="btn btn-success" data-dismiss="modal">Try Again</button> -->
+          </div>
+        </div>
+      </div>
+    </div>   
+
+
+           <div class="Card text-center text-success" style="align-self: center;"><h1><strong>MerkleStream</strong></h1></div>
+           <!-- / .main-navbar 
+           <div class="main-content-container container-fluid px-4">
+            <!-- Page Header 
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <!--   <span class="text-uppercase page-subtitle">>Write a Post</span>
+               
+              </div>
+            </div>-->
+            <div class="container" id="statusBar">
+                <h2>Uploading Post</h2>
+                <p id="proStatus">Initiating...</p> 
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    <span id="barStatusValue">0%</span>
+                  </div>
+                </div>
+              </div>
+            <h3 class="page-title text-center">Add New Post</h3>
+            <!-- End Page Header -->
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <!-- Add New Post Form -->
+                <div class="card card-small mb-3">
+                  <div class="card-body" >
+                    <form   enctype="multipart/form-data" class="add-new-post">
+                     <strong>Title:</strong> &nbsp; <input class="form-control form-control-lg mb-3" type="text" placeholder="Your Post Title" name="title" id="title">
+                     <span class="text-warning text-uppercase"><strong>Upload Video</strong></span>
+                      <input type="file" name="image" id="image" ><br><br>
+                      Stream Amount<input type="streamAmount" class="form-control form-control-lg mb-3" placeholder="Enter amount of ether to stream on time of video watch" name="streamAmount" id="streamAmount">
+                      
+                      <strong>Content(MarkDown Supported):</strong> <input type="text" name="" id="tarea">
+
+                     
+                    </form>
+                    <button class="btn-primary btn-lg" id="post" >Post</button>
+                  </div>
+                </div>
+                <!-- / Add New Post Form -->
+              </div>
+
+                
+              </div>
+            </div>
+          </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        
+        
+        <script>
+            $(window).on("load",()=>{
+            App.loadWritePost();
+            });
+          
+      </script>
+    </body>
+</html>

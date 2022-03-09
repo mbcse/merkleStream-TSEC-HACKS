@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>MerkleStream</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+
+
+	<!-- Font -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+
+	<link href="common-css/bootstrap.css" rel="stylesheet">
+
+	<link href="common-css/ionicons.css" rel="stylesheet">
+
+
+	<link href="layout-1/css/styles.css" rel="stylesheet">
+
+  <link href="layout-1/css/responsive.css" rel="stylesheet">
+	<link href="/mycss.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@portis/web3@3.0.2/umd/index.js"></script>
+  <script src="/common-js/jquery-3.1.1.min.js"></script>
+  <script src="https://unpkg.com/ipfs-api@9.0.0/dist/index.js"
+  integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+  crossorigin="anonymous"></script> 
+
+
+
+    <script src="/web3.min.js"></script>
+    <script src="/web3APP.js"></script>
+
+    
+
+
+    <style>
+  body{
+  margin-top: auto;
+    background-color: #f1f1f1;
+  }
+  .border{
+    border-bottom:1px solid #F1F1F1;
+    margin-bottom:10px;
+  }
+  .main-secction{
+    box-shadow: 10px 10px 10px;
+  }
+  .image-section{
+    padding: 0px;
+  }
+  .image-section img{
+    width: 100%;
+    height:250px;
+    position: relative;
+  }
+  .user-image{
+    position: absolute;
+    margin-top:-50px;
+  }
+  .user-left-part{
+    margin: 0px;
+  }
+  .user-image img{
+    width:100px;
+    height:100px;
+  }
+  .user-profil-part{
+    padding-bottom:30px;
+    background-color:#FAFAFA;
+  }
+  .follow{    
+    margin-top:70px;   
+  }
+  .user-detail-row{
+    margin:0px; 
+  }
+  .user-detail-section2 p{
+    font-size:12px;
+    padding: 0px;
+    margin: 0px;
+  }
+  .user-detail-section2{
+    margin-top:10px;
+  }
+  .user-detail-section2 span{
+    color:#7CBBC3;
+    font-size: 20px;
+  }
+  .user-detail-section2 small{
+    font-size:12px;
+    color:#D3A86A;
+  }
+  .profile-right-section{
+    padding: 20px 0px 10px 15px;
+    background-color: #FFFFFF;  
+  }
+  .profile-right-section-row{
+    margin: 0px;
+  }
+  .profile-header-section1 h1{
+    font-size: 25px;
+    margin: 0px;
+  }
+  .profile-header-section1 h5{
+    color: #0062cc;
+  }
+  .req-btn{
+    height:30px;
+    font-size:12px;
+  }
+  .profile-tag{
+    padding: 10px;
+    border:1px solid #F6F6F6;
+  }
+  .profile-tag p{
+    font-size: 12px;
+    color:black;
+  }
+  .profile-tag i{
+    color:#ADADAD;
+    font-size: 20px;
+  }
+  .image-right-part{
+    background-color: #FCFCFC;
+    margin: 0px;
+    padding: 5px;
+  }
+  .img-main-rightPart{
+    background-color: #FCFCFC;
+    margin-top: auto;
+  }
+  .image-right-detail{
+    padding: 0px;
+  }
+  .image-right-detail p{
+    font-size: 12px;
+  }
+  .image-right-detail a:hover{
+    text-decoration: none;
+  }
+  .image-right img{
+    width: 100%;
+  }
+  .image-right-detail-section2{
+    margin: 0px;
+  }
+  .image-right-detail-section2 p{
+    color:#38ACDF;
+    margin:0px;
+  }
+  .image-right-detail-section2 span{
+    color:#7F7F7F;
+  }
+
+  .nav-link{
+    font-size: 1.2em;    
+  }
+  
+    </style>
+</head>
+<body >
+
+  <div id="loader" class="text-white text-center">
+		<h2>Connecting You to Merkle Stream</h2>
+		<h4>Deployed on MATIC, Kovan, Powered By PORTIS, Filecoin</h4>
+		<br>
+		<h4 id="msg"></h4>
+	  </div> 
+
+	    <!-- General Modal -->
+<div id="generalMsgModal" class="modal fade" style="z-index: 999999;">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header justify-content-center">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body text-center">
+				<h4>Ooops!</h4>	
+				<p id="generalModalMessage">Error!!!!</p>
+				<!-- <button class="btn btn-success" data-dismiss="modal">Try Again</button> -->
+			</div>
+		</div>
+	</div>
+</div>   
+
+    	  <!-- Modal -->
+	  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Notice</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<h5 id="message" >You don't have a subscription, Click to pay 1 dai to get subscription for 30 days</h5>
+				<div class="container" id="statusBar">
+					<h2 id="headingmessage">Transacting</h2><br>
+					There will be series of Metamask Popup's
+					<p id="proStatus">Starting</p> 
+					<div class="progress">
+					  <div class="progress-bar progress-bar-striped progress-bar-animated" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+						<span id="barStatusValue">0%</span>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel" style="display: block;">Cancel</button>
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;" id="close">close</button>
+			  <button type="button" class="btn btn-primary" id="subscribe" style="display: block;">subscribe</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+        <!-- Modal End -->
+
+
+    	  <!-- Modal -->
+          <div class="modal fade" id="transferModal"  tabindex="-2" role="dialog" aria-labelledby="transferModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="transferModalLabel">Notice</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <h5 id="Tmessage" >You have a subscription, Enter To address and click Transfer To transfer Subscription!</h5>
+                    <div class="container" id="TstatusBar">
+                     
+                        <div id="toaddressinputdiv">
+                        Address:&nbsp;<input type="text" name="toAddress" id="toAddress">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Tcancel" style="display: block;">Cancel</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;" id="Tclose">close</button>
+                  <button type="button" class="btn btn-primary" id="transfer" style="display: block;">Transfer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            <!-- Modal End -->        
+
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+
+			<a href="/" class="logo"><strong><span class="text-primary" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-size: large;">MerkleStream</span></strong>
+				</a>
+
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li><a href="/">Home</a></li>
+				<li><a href="/">Categories</a></li>
+				<li><a href="/">Features</a></li>
+				<li><a href="/write">Upload</a></li>
+				<li><a href="/myaccount">My Account</a></li>
+			</ul><!-- main-menu -->
+
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+
+		</div><!-- conatiner -->
+	</header>
+<!--********************************************************************************************************************************-->
+    <div class="container main-secction">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 image-section">
+                <img src="" id="coverimage">
+            </div>
+            <div class="row user-left-part">
+                <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                    <div class="row ">
+                        <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                            <img src="" id="userimage" class="rounded-circle">
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
+                            <button id="btn-contact" (click)="clearModal()" data-toggle="modal" data-target="#contact" class="btn btn-success btn-block follow">Update Profile</button> 
+                            <button class="btn btn-warning btn-block" id="subscribebtn" data-toggle="modal" data-target="#exampleModal">SUBSCRIBE</button>                               
+                            <button class="btn btn-warning btn-block" id="transferbtn" style="display: none;" data-toggle="modal" data-target="#transferModal">TRANSFER SUBSCRIPTION</button>                               
+                          
+                        </div>
+                        <div class="row user-detail-row">
+                            <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
+                                <div class="border"></div>
+                                <p>FOLLOWER</p>
+                                <span>320</span>
+                            </div>                           
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                    <div class="row profile-right-section-row">
+                        <div class="col-md-12 profile-header">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                    <h1 >MerkleStream Profile</h1>
+                                    <h5>Developer</h5>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
+                                    <button class="btn btn-primary btn-block" id="getpaidbtn">GET PAID</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                  <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><i class="fas fa-user-circle"></i> User Details</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                  <a class="nav-link" href="#buzz" role="tab" data-toggle="tab"><i class="fas fa-info-circle"></i> Subscription Details</a>
+                                                </li>                                                
+                                              </ul>
+                                              
+                                              <!-- Tab panes -->
+                                              <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane fade show active" id="profile">
+                                                        <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Ethereum Address</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="ethaddress">-</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Name</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="name">-</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Total Post's</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="userpostcount">-</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                              <div class="col-md-2">
+                                                                  <label>Total Likes</label>
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                  <p id="userlikes">0</p>
+                                                              </div>
+                                                          </div>
+                                                   
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="buzz">
+                                                        <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>User Status</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="userstatus">Expert</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>Subscribed</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="isusersubscribed">-</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>Subscription End Date</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p id="subscriptiontime">-</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                              <div class="col-md-6">
+                                                                  <label>Earned Amount</label>
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                  <p id="earnedAmount">-</p>
+                                                              </div>
+                                                          </div>
+                                
+                                                </div>
+                                                
+                                              </div>
+                          
+                                </div>
+                                <div class="col-md-4 img-main-rightPart">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row image-right-part">
+                                                <div class="col-md-6 pull-left image-right-detail">
+                                                    <h6></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="">
+                                            <div class="col-md-12 image-right">
+                                                <img src="/images/eth.jfif">
+                                            </div>
+                                        </a>
+                                        <div class="col-md-12 image-right-detail-section2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contact">Profile Update</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p for="msj">Upload a Beautiful Picture and let the world know You</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtFullname">Name<span class="text-success" id="namemessage"></span></label>
+                        <input type="text" id="usernameupload" class="form-control">
+                        <button class="btn-primary" id="namebtn">Update Name</span></button>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEmail">Profile Image <span class="text-success" id="profilemessage"></span></label>
+                        <input type="file" id="userimageupload" class="form-control">
+                        <button class="btn-primary" id="profilebtn">Update Profile Image</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPhone"></label>Cover Image <span class="text-success" id="covermessage"></span> </label>
+                        <input type="file" id="coverimageupload" class="form-control">
+                        <button class="btn-primary" id="coverbtn">Update Cover Image</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h3 class="text-center" style="margin: 10px;">Post's Uploaded</h3>
+
+	<section class="blog-area section">
+		<div class="container">
+
+			<div class="row" id="posts">
+
+				
+
+			</div><!-- row -->
+
+			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+
+		</div><!-- container -->
+	</section> <!--section -->
+
+<!--************************************************************************************************************************-->
+	<footer>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<a class="logo" href="#"></a>
+						<p class="copyright">MerkleStream 2020. All rights reserved.</p>
+						<p class="copyright">Designed by <a href="/" target="_blank">Blockchain</a></p>
+						<ul class="icons">
+							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+						</ul>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+						<div class="footer-section">
+						<h4 class="title"><b>CATAGORIES</b></h4>
+						<ul>
+							<li><a href="#">BEAUTY</a></li>
+							<li><a href="#">HEALTH</a></li>
+							<li><a href="#">MUSIC</a></li>
+						</ul>
+						<ul>
+							<li><a href="#">SPORT</a></li>
+							<li><a href="#">DESIGN</a></li>
+							<li><a href="#">TRAVEL</a></li>
+							<li><a href="#">BLOCKCHAIN</a></li>
+							<li><a href="#">TECH</a></li>
+						</ul>
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<h4 class="title"><b>SUBSCRIBE</b></h4>
+						<div class="input-area">
+							<form>
+								<input class="email-input" type="text" placeholder="Enter your email">
+								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+							</form>
+						</div>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</footer>
+
+
+	<!-- SCIPTS -->
+
+	<script src="/common-js/jquery-3.1.1.min.js"></script>
+	<script src="/common-js/tether.min.js"></script>
+	<script src="/common-js/bootstrap.js"></script>
+  <script src="https://bundle.run/buffer@5.2.1"></script>
+	<script src="/common-js/scripts.js"></script>
+	
+	
+	<script>
+$(window).on("load",()=>{
+App.loadProfile();
+});
+
+
+  
+
+    </script>
+    
+
+
+
+
+
+</body>
+</html>
